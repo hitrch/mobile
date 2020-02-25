@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,15 +67,10 @@ public class MainActivity extends AppCompatActivity {
         companyMap.put("Nokia", nokiaPhoneTypes);
 
 
-
-        for(Map.Entry<String, String[]> entry : applePhoneTypes.entrySet()) {
+        for (Map.Entry<String, String[]> entry : applePhoneTypes.entrySet()) {
             String key = entry.getKey();
-            String[] value = entry.getValue();
 
             System.out.print(key);
-
-            // do what you have to do here
-            // In your case, another loop.
         }
 
 
@@ -84,55 +82,49 @@ public class MainActivity extends AppCompatActivity {
         // Применяем адаптер к элементу spinner
         spinner.setAdapter(adapter);
 
-        Spinner spinner2 = findViewById(R.id.spinner2);
-        // Создаем адаптер ArrayAdapter с помощью массива строк и стандартной разметки элемета spinner
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, companies);
-        // Определяем разметку для использования при выборе элемента
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Применяем адаптер к элементу spinner
-        spinner2.setAdapter(adapter2);
-
 
         //making TextView scrolable
         TextView textView = findViewById(R.id.textView2);
         textView.setMovementMethod(new ScrollingMovementMethod());
     }
 
-    public void onMyButtonClick(View view)
-    {
+    public void onMyButtonClick(View view) {
         Spinner spinner = findViewById(R.id.spinner);
-        Spinner spinner2 = findViewById(R.id.spinner2);
+        RadioGroup rg = findViewById(R.id.rg);
+        RadioButton selectedButton = findViewById(rg.getCheckedRadioButtonId());
 
 
         TextView textView = findViewById(R.id.textView2);
 
         //getting selected values
         String selectedPhoneType = spinner.getSelectedItem().toString();
-        String selectedCompany = spinner2.getSelectedItem().toString();
+        String selectedCompany = "";
+
+        if(selectedButton != null){
+            selectedCompany = selectedButton.getText().toString();
+        }
+        else {
+            Toast toast = Toast.makeText(getApplicationContext(), "Select company", 300);
+            toast.show();
+        }
+
 
         String buffer = "";
 
         HashMap<String, String[]> companyCheck = companyMap.get(selectedCompany);
 
         //checking for nulls
-        if(companyCheck != null)
-        {
+        if (companyCheck != null) {
             String[] phoneArray = companyCheck.get(selectedPhoneType);
 
-            if(phoneArray != null)
-            {
-                for(int i = 0; i < phoneArray.length; i++)
-                {
+            if (phoneArray != null) {
+                for (int i = 0; i < phoneArray.length; i++) {
                     buffer += phoneArray[i] + "\n";
                 }
-            }
-            else
-            {
+            } else {
                 buffer = "No phones found";
             }
-        }
-        else
-        {
+        } else {
             buffer = "No company found";
         }
 
