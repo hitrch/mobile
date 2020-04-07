@@ -21,6 +21,7 @@ public class Input extends Fragment {
     private OnFragmentInteractionListener mListener;
     HashMap<String, HashMap<String, String[]>> companyMap = new HashMap<>();
 
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(String buffer);
     }
@@ -85,7 +86,7 @@ public class Input extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateDetail(view);
+                updateAndSaveDetail();
             }
         });
 
@@ -103,48 +104,49 @@ public class Input extends Fragment {
         }
     }
 
-    public void updateDetail(View view) {
-        Spinner spinner = view.findViewById(R.id.spinner);
-        RadioGroup rg = view.findViewById(R.id.rg);
-        RadioButton selectedButton = view.findViewById(rg.getCheckedRadioButtonId());
+    public void updateAndSaveDetail() {
+        Spinner spinner = getView().findViewById(R.id.spinner);
+        RadioGroup rg = getView().findViewById(R.id.rg);
+        RadioButton selectedButton = getView().findViewById(rg.getCheckedRadioButtonId());
 
 
 
-        //getting selected values
-        String selectedPhoneType = spinner.getSelectedItem().toString();
-        String selectedCompany = "";
+
 
         if(selectedButton != null){
+            //getting selected values
+            String selectedPhoneType = spinner.getSelectedItem().toString();
+            String selectedCompany = "";
             selectedCompany = selectedButton.getText().toString();
+            String buffer = "";
+
+            HashMap<String, String[]> companyCheck = companyMap.get(selectedCompany);
+
+            //checking for nulls
+            if (companyCheck != null) {
+                String[] phoneArray = companyCheck.get(selectedPhoneType);
+
+                if (phoneArray != null) {
+                    for (int i = 0; i < phoneArray.length; i++) {
+                        buffer += phoneArray[i] + "\n";
+                    }
+                } else {
+                    buffer = "No phones found";
+                }
+            } else {
+                buffer = "No company found";
+            }
+
+
+
+
+            // Посылаем данные Activity
+            mListener.onFragmentInteraction(buffer);
         }
         else {
             Toast toast = Toast.makeText(getActivity().getApplicationContext(), "Select company", 300);
             toast.show();
         }
-
-
-        String buffer = "";
-
-        HashMap<String, String[]> companyCheck = companyMap.get(selectedCompany);
-
-        //checking for nulls
-        if (companyCheck != null) {
-            String[] phoneArray = companyCheck.get(selectedPhoneType);
-
-            if (phoneArray != null) {
-                for (int i = 0; i < phoneArray.length; i++) {
-                    buffer += phoneArray[i] + "\n";
-                }
-            } else {
-                buffer = "No phones found";
-            }
-        } else {
-            buffer = "No company found";
-        }
-
-
-        // Посылаем данные Activity
-        mListener.onFragmentInteraction(buffer);
     }
 }
 
