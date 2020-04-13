@@ -109,10 +109,6 @@ public class Input extends Fragment {
         RadioGroup rg = getView().findViewById(R.id.rg);
         RadioButton selectedButton = getView().findViewById(rg.getCheckedRadioButtonId());
 
-
-
-
-
         if(selectedButton != null){
             //getting selected values
             String selectedPhoneType = spinner.getSelectedItem().toString();
@@ -131,14 +127,11 @@ public class Input extends Fragment {
                         buffer += phoneArray[i] + "\n";
                     }
                 } else {
-                    buffer = "No phones found";
+                    buffer = "No phones found\n";
                 }
             } else {
-                buffer = "No company found";
+                buffer = "No company found\n";
             }
-
-
-
 
             // Посылаем данные Activity
             mListener.onFragmentInteraction(buffer);
