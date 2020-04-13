@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class DBoutput extends AppCompatActivity {
@@ -15,6 +17,20 @@ public class DBoutput extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dboutput);
 
+        dbOutput();
+
+        Button closeButton = findViewById(R.id.closeButton);
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+
+
+    public void dbOutput(){
         SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
 
         Cursor query = db.rawQuery("SELECT * FROM info;", null);
