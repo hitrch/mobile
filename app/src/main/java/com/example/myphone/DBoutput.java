@@ -17,20 +17,12 @@ public class DBoutput extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dboutput);
 
-        dbOutput();
-
-        Button closeButton = findViewById(R.id.closeButton);
-
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        showDB();
     }
 
 
 
-    public void dbOutput(){
+    public void showDB(){
         SQLiteDatabase db = getBaseContext().openOrCreateDatabase("app.db", MODE_PRIVATE, null);
 
         Cursor query = db.rawQuery("SELECT * FROM info;", null);

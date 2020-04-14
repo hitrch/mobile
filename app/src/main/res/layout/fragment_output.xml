@@ -13,10 +13,11 @@
         android:id="@+id/textView"
         android:layout_width="379dp"
         android:layout_height="193dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
 
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="20dp"
         android:text="Select to see results"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
