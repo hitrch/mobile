@@ -35,10 +35,22 @@
         android:id="@+id/dbButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="Open DB"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_input" />
+
+    <Button
+        android:id="@+id/playerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Player"
+        app:layout_constraintStart_toEndOf="@+id/dbButton"
         app:layout_constraintTop_toBottomOf="@+id/fragment_input" />
 
 

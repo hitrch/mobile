@@ -29,6 +29,16 @@ public class MainActivity extends AppCompatActivity implements Input.OnFragmentI
                 startActivity(intent);
             }
         });
+
+        Button playerButton = findViewById(R.id.playerButton);
+
+        playerButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Player.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
     @Override
