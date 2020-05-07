@@ -59,5 +59,9 @@ public class Player extends AppCompatActivity {
             videoPlayer.stopPlayback();
             videoPlayer.resume();
         }
+        else {
+            Toast toast = Toast.makeText(getApplicationContext(), "Please open file", 400);
+            toast.show();
+        }
     }
 }
